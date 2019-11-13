@@ -3,12 +3,15 @@
 
 require 'json'
 
+# Notify a Mattermost instance using a webhook url.
 class MattermostNotifier
+  attr_accessor :webhook_url
+
   def initialize(webhook_url)
-    @webhook_url = webhook_url
+    self.webhook_url = webhook_url
   end
 
-  # https://docs.mattermost.com/developer/webhooks-incoming.html
+  # Docs: https://docs.mattermost.com/developer/webhooks-incoming.html
   def send(message)
     headers = { 'Content-Type' => 'application/json' }
     payload = { text: message }.to_json

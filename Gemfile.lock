@@ -27,8 +27,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  httparty!
-  rspec!
+  httparty
+  rspec
 
 BUNDLED WITH
    2.0.2

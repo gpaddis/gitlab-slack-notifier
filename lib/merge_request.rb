@@ -24,4 +24,8 @@ class MergeRequest
   def can_be_merged
     @merge_status == 'can_be_merged'
   end
+
+  def waiting_days
+    return 2
+  end
 end

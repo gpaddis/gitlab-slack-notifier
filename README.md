@@ -1,0 +1,1 @@
+Inspired by [slack-gitlab-mr-reminder](https://github.com/monokh/slack-gitlab-mr-reminder).

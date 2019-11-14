@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'json'
 require 'httparty'
 
 # The Gitlab client retrieves the open merge requests
@@ -25,7 +26,7 @@ class Gitlab
     group_ids.each do |id|
       endpoint = "#{api_url}/groups/#{id}/merge_requests?state=opened"
       response = HTTParty.get(endpoint, headers: headers)
-      p response.body
+      p JSON.parse(response.body).first
     end
   end
 end

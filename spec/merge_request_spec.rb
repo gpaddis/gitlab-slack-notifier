@@ -16,7 +16,8 @@ RSpec.describe MergeRequest do
 
     it 'has been waiting since today' do
       # Check out: https://www.rubyguides.com/2015/12/ruby-time/
-      mr = MergeRequest.new(updated_at: Time.now.strftime('%Y-%m-%d\T%I:%M:%S\Z'))
+      updated_at = Time.now.strftime('%Y-%m-%d\T%I:%M:%S\Z')
+      mr = MergeRequest.new(updated_at: updated_at)
       expect(mr.waiting_days).to eq 0
     end
   end

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 # Docs: https://docs.gitlab.com/ee/api/merge_requests.html#list-group-merge-requests
-# GET /groups/:id/merge_requests?state=opened
 class MergeRequest
   attr_reader :title,
               :author,

@@ -1,0 +1,5 @@
+{
+    "gitlab_url": "https://www.gitlab.com/",
+    "gitlab_token": "example-token",
+    "slack_webhook_url": "https://slack.example.com/abc123"
+}

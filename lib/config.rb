@@ -6,13 +6,13 @@ require 'json'
 class Config
   attr_reader :gitlab_url,
               :gitlab_token,
-              :gitlab_groups,
+              :gitlab_group_ids,
               :slack_webhook_url
 
   def initialize(options = {})
     @gitlab_url = options['gitlab_url']
     @gitlab_token = options['gitlab_token']
-    @gitlab_groups = options['gitlab_groups']
+    @gitlab_group_ids = options['gitlab_group_ids']
     @slack_webhook_url = options['slack_webhook_url']
   end
 

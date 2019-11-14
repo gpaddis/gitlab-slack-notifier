@@ -8,6 +8,7 @@ RSpec.describe Config do
       config_file = 'config.example.json'
       config = Config.from_file(config_file)
       expect(config.gitlab_url).to eq 'https://www.gitlab.com/'
+      expect(config.gitlab_group_ids).to eq [3, 4, 5]
     end
   end
 end

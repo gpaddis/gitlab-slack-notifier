@@ -10,15 +10,15 @@ RSpec.describe Gitlab do
     end
 
     it 'removes redundant api uri from the url' do
-      gitlab = Gitlab.new('https://gitlab.example.com/api/v4', 'abc123', %w[group1 group2])
+      gitlab = Gitlab.new('https://gitlab.example.com/api/v4/', 'abc123', %w[group1 group2])
       expect(gitlab.api_url).to eq 'https://gitlab.example.com/api/v4'
     end
 
-    it 'adds removes trailing slashes from the url' do
+    it 'adds or removes trailing slashes from the url' do
       gitlab = Gitlab.new('https://gitlab.example.com', 'abc123', %w[group1 group2])
       expect(gitlab.api_url).to eq 'https://gitlab.example.com/api/v4'
 
-      gitlab = Gitlab.new('https://gitlab.example.com/api/v4/', 'abc123', %w[group1 group2])
+      gitlab = Gitlab.new('https://gitlab.example.com/api/v4', 'abc123', %w[group1 group2])
       expect(gitlab.api_url).to eq 'https://gitlab.example.com/api/v4'
     end
   end

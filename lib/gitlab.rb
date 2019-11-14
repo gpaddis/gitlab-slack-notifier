@@ -1,14 +1,16 @@
 # frozen_string_literal: true
 
+require 'httparty'
+
 # The Gitlab client retrieves the open merge requests
 # for the groups specified in the configuration.
 class Gitlab
-  attr_reader :url
+  attr_reader :url, :group_ids
 
-  def initialize(url, token, groups)
+  def initialize(url, token, group_ids)
     @url = url
     @token = token
-    @groups = groups
+    @group_ids = group_ids
   end
 
   # Generate a well-formed api url.
@@ -17,9 +19,13 @@ class Gitlab
     base_url.chomp('/') + '/api/v4'
   end
 
-  # Get all open merge requests for the given group id.
-  # GET /groups/:id/merge_requests?state=opened
-  def get_open_merge_requests(group_id)
+  # Get all open merge requests.
+  def open_merge_requests
     headers = { 'PRIVATE-TOKEN': @token }
+    group_ids.each do |id|
+      endpoint = "#{api_url}/groups/#{id}/merge_requests?state=opened"
+      response = HTTParty.get(endpoint, headers: headers)
+      p response.body
+    end
   end
 end

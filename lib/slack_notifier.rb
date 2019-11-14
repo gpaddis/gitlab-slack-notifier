@@ -2,6 +2,7 @@
 # frozen_string_literal: true
 
 require 'json'
+require 'httparty'
 
 # Notify a Slack instance using a webhook url.
 class SlackNotifier
@@ -11,6 +12,7 @@ class SlackNotifier
     self.webhook_url = webhook_url
   end
 
+  # Docs: https://api.slack.com/messaging/webhooks#posting_with_webhooks
   # Docs: https://docs.mattermost.com/developer/webhooks-incoming.html
   def send(message)
     headers = { 'Content-Type' => 'application/json' }

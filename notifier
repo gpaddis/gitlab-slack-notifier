@@ -9,6 +9,6 @@ config_file = File.join(File.dirname(__FILE__), 'config.json')
 config = Config.from_file(config_file)
 
 gitlab = Gitlab.new(config.gitlab_url, config.gitlab_token, config.gitlab_group_ids)
-gitlab.open_merge_requests
+p gitlab.open_merge_requests
 # slack = SlackNotifier.new(config.slack_webhook_url)
 # slack.send('Hello World!')

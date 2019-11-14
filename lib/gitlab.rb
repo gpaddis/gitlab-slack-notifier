@@ -3,6 +3,8 @@
 require 'json'
 require 'httparty'
 
+require_relative 'merge_request'
+
 # The Gitlab client retrieves the open merge requests
 # for the groups specified in the configuration.
 class Gitlab
@@ -23,10 +25,28 @@ class Gitlab
   # Get all open merge requests.
   def open_merge_requests
     headers = { 'PRIVATE-TOKEN': @token }
+    merge_requests = []
     group_ids.each do |id|
       endpoint = "#{api_url}/groups/#{id}/merge_requests?state=opened"
       response = HTTParty.get(endpoint, headers: headers)
-      p JSON.parse(response.body).first
+      merge_requests += JSON.parse(response.body)
     end
+    merge_requests.map! { |mr| map_to_merge_request(mr) }
+    merge_requests.select!(&:can_be_merged)
+  end
+
+  # Map a merge request hash to a mr object.
+  def map_to_merge_request(mr)
+    MergeRequest.new(
+      title: mr['title'],
+      state: mr['state'],
+      author: mr['author']['name'],
+      web_url: mr['web_url'],
+      assignees: mr['assignees'],
+      updated_at: mr['updated_at'],
+      description: mr['description'],
+      merge_status: mr['merge_status'],
+      work_in_progress: mr['work_in_progress']
+    )
   end
 end

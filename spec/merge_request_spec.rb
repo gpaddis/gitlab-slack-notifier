@@ -5,12 +5,17 @@ require 'merge_request'
 RSpec.describe MergeRequest do
   context 'an open merge request' do
     it 'can be merged' do
-      mr = MergeRequest.new(merge_status: 'can_be_merged')
+      mr = MergeRequest.new(merge_status: 'can_be_merged', work_in_progress: false)
       expect(mr.can_be_merged).to be true
     end
 
-    it 'cannot be merged' do
+    it 'cannot be merged if the status is set to cannot_be_merged' do
       mr = MergeRequest.new(merge_status: 'cannot_be_merged')
+      expect(mr.can_be_merged).to be false
+    end
+
+    it 'cannot be merged if work in progress' do
+      mr = MergeRequest.new(work_in_progress: true, merge_status: 'can_be_merged')
       expect(mr.can_be_merged).to be false
     end
 

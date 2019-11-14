@@ -20,8 +20,9 @@ class MergeRequest
     @work_in_progress = options[:work_in_progress]
   end
 
+  # Check if the merge request can be merged.
   def can_be_merged
-    @merge_status == 'can_be_merged'
+    @merge_status == 'can_be_merged' && @work_in_progress == false
   end
 
   def waiting_days

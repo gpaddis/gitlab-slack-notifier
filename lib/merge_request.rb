@@ -7,7 +7,6 @@ class MergeRequest
   attr_reader :title,
               :author,
               :web_url,
-              :assignees,
               :description
 
   def initialize(options = {})
@@ -20,6 +19,15 @@ class MergeRequest
     @description = options[:description]
     @merge_status = options[:merge_status]
     @work_in_progress = options[:work_in_progress]
+  end
+
+  # Return a comma separated list of the MR assignees.
+  def assignees
+    if @assignees == []
+      'Not assigned'
+    else
+      @assignees.map { |assignee| assignee['name'] }.join(', ')
+    end
   end
 
   # Check if the merge request can be merged.

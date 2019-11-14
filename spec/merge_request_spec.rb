@@ -23,9 +23,9 @@ RSpec.describe MergeRequest do
 end
 
 RSpec.describe MergeRequest, '#waiting_days' do
-  context 'a merge request wast last updated' do
-    datetime_pattern = '%Y-%m-%d\T%I:%M:%S\Z'
+  datetime_pattern = '%Y-%m-%d\T%I:%M:%S\Z'
 
+  context 'a merge request wast last updated' do
     it 'was last updated today' do
       today = Date.today.strftime(datetime_pattern)
       mr = MergeRequest.new(updated_at: today)
@@ -37,5 +37,28 @@ RSpec.describe MergeRequest, '#waiting_days' do
       mr = MergeRequest.new(updated_at: yesterday)
       expect(mr.waiting_days).to eq 1
     end
+  end
+end
+
+RSpec.describe MergeRequest, '#assignees' do
+  it 'returns the names of the assignees' do
+    assignees = [
+      {
+        'id' => 123,
+        'name' => 'John Smith',
+        'username' => 'john.smith',
+        'state' => 'active',
+        'avatar_url' => 'https://www.gitlab.com/uploads/-/system/user/avatar/123/avatar.png',
+        'web_url' => 'https://www.gitlab.com/john.smith'
+      }
+    ]
+
+    mr = MergeRequest.new(assignees: assignees)
+    expect(mr.assignees).to eq 'John Smith'
+  end
+
+  it 'returns a default string if the mr has no assignees' do
+    mr = MergeRequest.new(assignees: [])
+    expect(mr.assignees).to eq 'Not assigned'
   end
 end

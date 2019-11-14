@@ -3,8 +3,8 @@
 
 require 'json'
 
-# Notify a Mattermost instance using a webhook url.
-class MattermostNotifier
+# Notify a Slack instance using a webhook url.
+class SlackNotifier
   attr_accessor :webhook_url
 
   def initialize(webhook_url)

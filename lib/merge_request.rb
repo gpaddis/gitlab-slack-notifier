@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'date'
+
 # Docs: https://docs.gitlab.com/ee/api/merge_requests.html#list-group-merge-requests
 class MergeRequest
   attr_reader :title,
@@ -25,7 +27,9 @@ class MergeRequest
     @merge_status == 'can_be_merged' && @work_in_progress == false
   end
 
+  # The number of days the merge request is waiting to be merged.
   def waiting_days
-    return 2
+    updated_at = Date.parse(@updated_at)
+    Date.today - updated_at
   end
 end

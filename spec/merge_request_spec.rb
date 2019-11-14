@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'date'
 require 'merge_request'
 
 RSpec.describe MergeRequest do
@@ -18,12 +19,21 @@ RSpec.describe MergeRequest do
       mr = MergeRequest.new(work_in_progress: true, merge_status: 'can_be_merged')
       expect(mr.can_be_merged).to be false
     end
+  end
 
-    # it 'has been waiting since today' do
-    #   # Check out: https://www.rubyguides.com/2015/12/ruby-time/
-    #   updated_at = Time.now.strftime('%Y-%m-%d\T%I:%M:%S\Z')
-    #   mr = MergeRequest.new(updated_at: updated_at)
-    #   expect(mr.waiting_days).to eq 0
-    # end
+  context 'a merge request wast last updated' do
+    datetime_pattern = '%Y-%m-%d\T%I:%M:%S\Z'
+
+    it 'was last updated today' do
+      today = Date.today.strftime(datetime_pattern)
+      mr = MergeRequest.new(updated_at: today)
+      expect(mr.waiting_days).to eq 0
+    end
+
+    it 'has been waiting since yesterday' do
+      yesterday = Date.today.prev_day.strftime(datetime_pattern)
+      mr = MergeRequest.new(updated_at: yesterday)
+      expect(mr.waiting_days).to eq 1
+    end
   end
 end

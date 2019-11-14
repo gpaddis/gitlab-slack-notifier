@@ -20,7 +20,9 @@ RSpec.describe MergeRequest do
       expect(mr.can_be_merged).to be false
     end
   end
+end
 
+RSpec.describe MergeRequest, '#waiting_days' do
   context 'a merge request wast last updated' do
     datetime_pattern = '%Y-%m-%d\T%I:%M:%S\Z'
 

@@ -7,7 +7,7 @@ require_relative 'lib/config'
 require_relative 'lib/slack_notifier'
 
 config_file = File.join(File.dirname(__FILE__), 'config.json')
-config = Config.new(JSON.parse(File.read(config_file)))
+config = Config.from_file(config_file)
 
 slack = SlackNotifier.new(config.slack_webhook_url)
 slack.send('Hello World!')

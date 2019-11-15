@@ -15,7 +15,7 @@ RSpec.describe MergeRequest do
       expect(mr.can_be_merged).to be false
     end
 
-    it 'cannot be merged if work in progress' do
+    it 'cannot be merged if it is a work in progress' do
       mr = MergeRequest.new(work_in_progress: true, merge_status: 'can_be_merged')
       expect(mr.can_be_merged).to be false
     end
@@ -26,13 +26,13 @@ RSpec.describe MergeRequest, '#waiting_days' do
   datetime_pattern = '%Y-%m-%d\T%I:%M:%S\Z'
 
   context 'a merge request wast last updated' do
-    it 'was last updated today' do
+    it 'was updated today' do
       today = Date.today.strftime(datetime_pattern)
       mr = MergeRequest.new(updated_at: today)
       expect(mr.waiting_days).to eq 0
     end
 
-    it 'has been waiting since yesterday' do
+    it 'was updated yesterday' do
       yesterday = Date.today.prev_day.strftime(datetime_pattern)
       mr = MergeRequest.new(updated_at: yesterday)
       expect(mr.waiting_days).to eq 1
@@ -57,7 +57,7 @@ RSpec.describe MergeRequest, '#assignees' do
     expect(mr.assignees).to eq 'John Smith'
   end
 
-  it 'returns nil if the mr has no assignees' do
+  it 'returns nil if the merge request has no assignees' do
     mr = MergeRequest.new(assignees: [])
     expect(mr.assignees).to be nil
   end

@@ -2,7 +2,7 @@
 
 require 'gitlab'
 
-RSpec.describe Gitlab do
+RSpec.describe Gitlab, '#api_url' do
   context 'with gitlab url and token' do
     it 'builds the correct api url when the base url is well-formed' do
       gitlab = Gitlab.new('https://gitlab.example.com/', 'abc123', %w[group1 group2])

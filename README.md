@@ -13,6 +13,8 @@ The list of notifications will look like this:
 
 ---
 
+The merge requests are sorted by date (older first) and marked with a :green_book: (1 day), :orange_book: (up to a week) or :closed_book: (older than a week). WIP MRs are not showned.
+
 This project was inspired by [slack-gitlab-mr-reminder](https://github.com/monokh/slack-gitlab-mr-reminder).
 
 ## Requirements
@@ -20,6 +22,10 @@ This project was inspired by [slack-gitlab-mr-reminder](https://github.com/monok
 * A Slack / Mattermost Webhook URL
 
 ## Setup
+Clone the repository and install the dependencies:
+```
+bundle
+```
 Copy the configuration file in the script directory:
 ```
 cp config.example.json config.json
@@ -28,7 +34,7 @@ Edit the file and set the correct values, then run the notifier script:
 ```
 ./notifier
 ```
-You will receive a notificaiton in your Slack channel with the list of open merge requests sorted by date.
+You will receive a notification in your Slack channel with the list of open merge requests.
 
 ## Tests
 Run `bundle exec guard` to keep the test suite running in watch mode.

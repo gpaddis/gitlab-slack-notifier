@@ -57,8 +57,8 @@ RSpec.describe MergeRequest, '#assignees' do
     expect(mr.assignees).to eq 'John Smith'
   end
 
-  it 'returns a default string if the mr has no assignees' do
+  it 'returns nil if the mr has no assignees' do
     mr = MergeRequest.new(assignees: [])
-    expect(mr.assignees).to eq 'Not assigned'
+    expect(mr.assignees).to be nil
   end
 end

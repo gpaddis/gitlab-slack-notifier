@@ -23,11 +23,7 @@ class MergeRequest
 
   # Return a comma separated list of the MR assignees.
   def assignees
-    if @assignees == []
-      'Not assigned'
-    else
-      @assignees.map { |assignee| assignee['name'] }.join(', ')
-    end
+    @assignees == [] ? nil : @assignees.map { |a| a['name'] }.join(', ')
   end
 
   # Check if the merge request can be merged.

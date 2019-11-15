@@ -31,7 +31,9 @@ class SlackNotifier
                    ':closed_book:'
                  end
     plural = mr.waiting_days == 1 ? 'day' : 'days'
-    assignees = mr.assignees ? "assigned to #{mr.assignees}" : 'no assignees yet'
-    "#{importance} [#{mr.title}](#{mr.web_url}) - Updated by #{mr.author} #{mr.waiting_days} #{plural} ago, #{assignees}\n"
+    message = "#{importance} [#{mr.title}](#{mr.web_url}) - Updated by #{mr.author} #{mr.waiting_days} #{plural} ago"
+    message += ", assigned to #{mr.assignees}" if mr.assignees
+    message += ' - :no_entry_sign: cannot be merged' unless mr.can_be_merged?
+    message + "\n"
   end
 end

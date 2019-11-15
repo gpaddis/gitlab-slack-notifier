@@ -1,7 +1,11 @@
 # Gitlab Slack Notifier
-Send a reminder to a Slack channel with a list of open merge requests waiting in the pipe.
+Send a reminder to a Slack channel with a list of open GitLab merge requests waiting for someone to merge them.
 
-Inspired by [slack-gitlab-mr-reminder](https://github.com/monokh/slack-gitlab-mr-reminder).
+This project was inspired by [slack-gitlab-mr-reminder](https://github.com/monokh/slack-gitlab-mr-reminder).
+
+## Requirements
+* A GitLab API Token
+* A Slack / Mattermost Webhook URL
 
 ## Setup
 Copy the configuration file in the script directory:

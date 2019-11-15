@@ -34,6 +34,6 @@ class MergeRequest
   # The number of days the merge request is waiting to be merged.
   def waiting_days
     updated_at = Date.parse(@updated_at)
-    Date.today - updated_at
+    (Date.today - updated_at).to_i
   end
 end

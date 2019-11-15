@@ -19,4 +19,18 @@ class SlackNotifier
     payload = { text: message }.to_json
     HTTParty.post(@webhook_url, body: payload, headers: headers)
   end
+
+  # Format a merge request as a Markdown one-liner.
+  def self.format_merge_request(mr)
+    importance = if mr.waiting_days <= 1
+                   ':green_book:'
+                 elsif mr.waiting_days > 1 && mr.waiting_days < 7
+                   ':orange_book:'
+                 else
+                   ':closed_book:'
+                 end
+    plural = mr.waiting_days == 1 ? 'day' : 'days'
+    assignees = mr.assignees ? "assigned to #{mr.assignees}" : 'no assignees yet'
+    "#{importance}[#{mr.title}](#{mr.web_url}) - Last updated by #{mr.author} #{mr.waiting_days} #{plural} ago, #{assignees}\n"
+  end
 end

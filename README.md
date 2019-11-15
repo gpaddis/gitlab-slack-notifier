@@ -7,9 +7,9 @@ The list of notifications will look like this:
 > ### Open Merge Requests - 15 November
 > If you are still working on a merge request, mark it as WIP and it will not appear in the list.
 >
-> :closed_book:[Resolve "Fix checkout bug"](https://www.gitlab.com/example/checkout/merge_requests/1) - Updated by John Smith 12 days ago, no assignees yet<br>
-> :orange_book:[Resolve "Add button to wishlist"](https://www.gitlab.com/example/wishlist/merge_requests/2) - Updated by John Smith 3 days ago, assigned to Nick Carter<br>
-> :green_book:[Resolve "Update styles.less"](https://www.gitlab.com/example/wishlist/merge_requests/3) - Updated by Nick Carter 1 day ago, no assignees yet<br>
+> :closed_book: [Resolve "Fix checkout bug"](https://www.gitlab.com/example/checkout/merge_requests/1) - Updated by John Smith 12 days ago, no assignees yet<br>
+> :orange_book: [Resolve "Add button to wishlist"](https://www.gitlab.com/example/wishlist/merge_requests/2) - Updated by John Smith 3 days ago, assigned to Nick Carter<br>
+> :green_book: [Resolve "Update styles.less"](https://www.gitlab.com/example/wishlist/merge_requests/3) - Updated by Nick Carter 1 day ago, no assignees yet<br>
 
 ---
 

@@ -4,7 +4,7 @@
 require 'json'
 require 'httparty'
 
-# Notify a Slack instance using a webhook url.
+# Notify a Slack / Mattermost instance using a webhook url.
 class SlackNotifier
   attr_accessor :webhook_url
 
@@ -12,6 +12,7 @@ class SlackNotifier
     self.webhook_url = webhook_url
   end
 
+  # Send a message using the Slack / Mattermost webhook.
   # Docs: https://api.slack.com/messaging/webhooks#posting_with_webhooks
   # Docs: https://docs.mattermost.com/developer/webhooks-incoming.html
   def send(message)
@@ -31,6 +32,6 @@ class SlackNotifier
                  end
     plural = mr.waiting_days == 1 ? 'day' : 'days'
     assignees = mr.assignees ? "assigned to #{mr.assignees}" : 'no assignees yet'
-    "#{importance}[#{mr.title}](#{mr.web_url}) - Updated by #{mr.author} #{mr.waiting_days} #{plural} ago, #{assignees}\n"
+    "#{importance} [#{mr.title}](#{mr.web_url}) - Updated by #{mr.author} #{mr.waiting_days} #{plural} ago, #{assignees}\n"
   end
 end

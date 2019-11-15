@@ -1,4 +1,6 @@
 # Gitlab Slack Notifier
+[![Build Status](https://travis-ci.com/gpaddis/gitlab-slack-notifier.svg?branch=master)](https://travis-ci.com/gpaddis/gitlab-slack-notifier)
+
 Send a reminder to a Slack channel with a list of open GitLab merge requests waiting for someone to merge them. You can define a list of groups to monitor, so that no merge requests sink into oblivion anymore.
 
 The list of notifications will look like this:

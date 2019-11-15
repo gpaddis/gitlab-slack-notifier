@@ -1,14 +1,27 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
+require 'date'
+
 require_relative 'lib/config'
-require_relative 'lib/slack_notifier'
 require_relative 'lib/gitlab'
+require_relative 'lib/slack_notifier'
 
 config_file = File.join(File.dirname(__FILE__), 'config.json')
 config = Config.from_file(config_file)
 
 gitlab = Gitlab.new(config.gitlab_url, config.gitlab_token, config.gitlab_group_ids)
-p gitlab.open_merge_requests
-# slack = SlackNotifier.new(config.slack_webhook_url)
-# slack.send('Hello World!')
+
+slack = SlackNotifier.new(config.slack_webhook_url)
+
+message = "### Open Merge Requests - #{Date.today.strftime('%e %B')}\n" \
+          "If you are still working on a merge request, mark it as WIP and it will not appear in the list.\n\n"
+
+gitlab.open_merge_requests.each do |mr|
+  if message.length > 3000
+    slack.send(message)
+    message = "*The list continues...*\n"
+  end
+  message += SlackNotifier.format_merge_request(mr)
+end
+slack.send(message)

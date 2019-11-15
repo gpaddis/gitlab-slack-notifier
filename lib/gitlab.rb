@@ -32,7 +32,7 @@ class Gitlab
       merge_requests += JSON.parse(response.body)
     end
     merge_requests.map! { |mr| map_to_merge_request(mr) }
-    merge_requests.select!(&:can_be_merged)
+    merge_requests.select!(&:can_be_merged?)
     merge_requests.sort! { |a, b| b.waiting_days <=> a.waiting_days }
   end
 

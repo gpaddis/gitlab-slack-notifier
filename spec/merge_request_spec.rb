@@ -3,21 +3,21 @@
 require 'date'
 require 'merge_request'
 
-RSpec.describe MergeRequest do
+RSpec.describe MergeRequest, '#can_be_merged?' do
   context 'an open merge request' do
     it 'can be merged' do
       mr = MergeRequest.new(merge_status: 'can_be_merged', work_in_progress: false)
-      expect(mr.can_be_merged).to be true
+      expect(mr.can_be_merged?).to be true
     end
 
     it 'cannot be merged if the status is set to cannot_be_merged' do
       mr = MergeRequest.new(merge_status: 'cannot_be_merged')
-      expect(mr.can_be_merged).to be false
+      expect(mr.can_be_merged?).to be false
     end
 
     it 'cannot be merged if it is a work in progress' do
       mr = MergeRequest.new(work_in_progress: true, merge_status: 'can_be_merged')
-      expect(mr.can_be_merged).to be false
+      expect(mr.can_be_merged?).to be false
     end
   end
 end

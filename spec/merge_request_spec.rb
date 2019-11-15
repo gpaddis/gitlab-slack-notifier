@@ -14,10 +14,19 @@ RSpec.describe MergeRequest, '#can_be_merged?' do
       mr = MergeRequest.new(merge_status: 'cannot_be_merged')
       expect(mr.can_be_merged?).to be false
     end
+  end
+end
 
-    it 'cannot be merged if it is a work in progress' do
-      mr = MergeRequest.new(work_in_progress: true, merge_status: 'can_be_merged')
-      expect(mr.can_be_merged?).to be false
+RSpec.describe MergeRequest, '#wip?' do
+  context 'an open merge request' do
+    it 'is marked as work in progress' do
+      mr = MergeRequest.new(work_in_progress: true)
+      expect(mr.wip?).to be true
+    end
+
+    it 'is not marked as work in progress' do
+      mr = MergeRequest.new(work_in_progress: false)
+      expect(mr.wip?).to be false
     end
   end
 end

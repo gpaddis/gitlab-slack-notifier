@@ -41,4 +41,25 @@ class MergeRequest
     updated_at = Date.parse(@updated_at)
     (Date.today - updated_at).to_i
   end
+
+  # Format a merge request as a Markdown one-liner.
+  def to_markdown
+    plural = waiting_days == 1 ? 'day' : 'days'
+    message = "#{importance_emoji} [#{title}](#{web_url}) - " \
+    "Updated by #{author} #{waiting_days} #{plural} ago"
+    message += ", assigned to #{assignees}" if assignees
+    message += ' :no_entry_sign: cannot be merged' unless can_be_merged?
+    message + "\n"
+  end
+
+  # Get the appropriate importance emoji for the merge request.
+  def importance_emoji
+    if waiting_days <= 1
+      ':green_book:'
+    elsif waiting_days > 1 && waiting_days < 7
+      ':orange_book:'
+    else
+      ':closed_book:'
+    end
+  end
 end

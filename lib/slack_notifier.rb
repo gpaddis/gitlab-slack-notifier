@@ -31,6 +31,6 @@ class SlackNotifier
                  end
     plural = mr.waiting_days == 1 ? 'day' : 'days'
     assignees = mr.assignees ? "assigned to #{mr.assignees}" : 'no assignees yet'
-    "#{importance}[#{mr.title}](#{mr.web_url}) - Last updated by #{mr.author} #{mr.waiting_days} #{plural} ago, #{assignees}\n"
+    "#{importance}[#{mr.title}](#{mr.web_url}) - Updated by #{mr.author} #{mr.waiting_days} #{plural} ago, #{assignees}\n"
   end
 end

@@ -8,7 +8,7 @@ require_relative 'merge_request'
 # The Gitlab client retrieves the open merge requests
 # for the groups specified in the configuration.
 class Gitlab
-  attr_reader :url, :group_ids
+  attr_reader :url, :token, :group_ids
 
   def initialize(url, token, group_ids)
     @url = url
@@ -24,7 +24,7 @@ class Gitlab
 
   # Get all open merge requests.
   def open_merge_requests
-    headers = { 'PRIVATE-TOKEN': @token }
+    headers = { 'PRIVATE-TOKEN': token }
     merge_requests = []
     group_ids.each do |id|
       endpoint = "#{api_url}/groups/#{id}/merge_requests?state=opened"
@@ -36,7 +36,7 @@ class Gitlab
     merge_requests.sort! { |a, b| b.waiting_days <=> a.waiting_days }
   end
 
-  # Map a merge request hash to a mr object.
+  # Map a merge request hash to a MergeRequest object.
   def map_to_merge_request(mr)
     MergeRequest.new(
       title: mr['title'],

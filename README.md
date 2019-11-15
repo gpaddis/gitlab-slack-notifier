@@ -15,7 +15,7 @@ The list of merge requests will look like this:
 
 ---
 
-The merge requests are sorted by date (older first) and marked with a :green_book: (1 day), :orange_book: (up to a week) or :closed_book: (older than a week). WIP MRs are not showned.
+The merge requests are sorted by date (older first) and marked with a :green_book: (1 day), :orange_book: (up to a week) or :closed_book: (older than a week). WIP MRs are not shown.
 
 This project was inspired by [slack-gitlab-mr-reminder](https://github.com/monokh/slack-gitlab-mr-reminder).
 

@@ -2,11 +2,12 @@
 
 source "https://rubygems.org"
 
-gem 'rspec'
+gem 'rake'
 gem 'httparty'
 
 group :development do
   gem 'guard'
+  gem 'rspec'
   gem 'guard-rspec', require: false
 end
 

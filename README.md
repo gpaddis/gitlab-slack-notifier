@@ -19,7 +19,7 @@ This project was inspired by [slack-gitlab-mr-reminder](https://github.com/monok
 
 ## Requirements
 * A GitLab API Token
-* A Slack / Mattermost Webhook URL
+* A Slack / [Mattermost](https://mattermost.com/) Webhook URL
 
 ## Setup
 Clone the repository and install the dependencies:

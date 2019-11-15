@@ -7,11 +7,8 @@ require_relative 'lib/config'
 require_relative 'lib/gitlab'
 require_relative 'lib/slack_notifier'
 
-config_file = File.join(File.dirname(__FILE__), 'config.json')
-config = Config.from_file(config_file)
-
+config = Config.from_file(File.join(File.dirname(__FILE__), 'config.json'))
 gitlab = Gitlab.new(config.gitlab_url, config.gitlab_token, config.gitlab_group_ids)
-
 slack = SlackNotifier.new(config.slack_webhook_url)
 
 message = "### Open Merge Requests - #{Date.today.strftime('%e %B')}\n" \

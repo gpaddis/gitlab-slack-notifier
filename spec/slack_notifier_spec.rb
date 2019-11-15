@@ -28,9 +28,10 @@ RSpec.describe SlackNotifier, '.format_merge_request' do
         work_in_progress: false
       )
       markdown = SlackNotifier.format_merge_request(merge_request)
-      expect(markdown).to eq ':green_book: [Resolve "Fix checkout bug"]' \
-                             '(https://www.gitlab.com/example/1) - ' \
-                             "Updated by John Smith 1 day ago, assigned to Jane Doe\n"
+      formatted = ':green_book: [Resolve "Fix checkout bug"]' \
+                  '(https://www.gitlab.com/example/1) - ' \
+                  "Updated by John Smith 1 day ago, assigned to Jane Doe\n"
+      expect(markdown).to eq formatted
     end
   end
 
@@ -46,10 +47,11 @@ RSpec.describe SlackNotifier, '.format_merge_request' do
         work_in_progress: false
       )
       markdown = SlackNotifier.format_merge_request(merge_request)
-      expect(markdown).to eq ':green_book: [Resolve "Fix checkout bug"]' \
-                             '(https://www.gitlab.com/example/1) - ' \
-                             'Updated by John Smith 1 day ago, assigned to Jane Doe ' \
-                             ":no_entry_sign: cannot be merged\n"
+      formatted = ':green_book: [Resolve "Fix checkout bug"]' \
+                  '(https://www.gitlab.com/example/1) - ' \
+                  'Updated by John Smith 1 day ago, assigned to Jane Doe ' \
+                  ":no_entry_sign: cannot be merged\n"
+      expect(markdown).to eq formatted
     end
   end
 
@@ -65,10 +67,11 @@ RSpec.describe SlackNotifier, '.format_merge_request' do
         work_in_progress: false
       )
       markdown = SlackNotifier.format_merge_request(merge_request)
-      expect(markdown).to eq ':green_book: [Resolve "Fix checkout bug"]' \
-                             '(https://www.gitlab.com/example/1) - ' \
-                             'Updated by John Smith 1 day ago ' \
-                             ":no_entry_sign: cannot be merged\n"
+      formatted = ':green_book: [Resolve "Fix checkout bug"]' \
+                  '(https://www.gitlab.com/example/1) - ' \
+                  'Updated by John Smith 1 day ago ' \
+                  ":no_entry_sign: cannot be merged\n"
+      expect(markdown).to eq formatted
     end
   end
 end

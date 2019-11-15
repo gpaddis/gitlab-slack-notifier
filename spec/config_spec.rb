@@ -2,7 +2,7 @@
 
 require 'config'
 
-RSpec.describe Config, '#from_file' do
+RSpec.describe Config, '.from_file' do
   context 'with a valid configuration file' do
     it 'reads the values from a file' do
       config_file = 'config.example.json'

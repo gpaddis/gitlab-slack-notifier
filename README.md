@@ -1,4 +1,4 @@
-# Gitlab Slack Notifier
+# GitLab Slack Notifier
 [![Build Status](https://travis-ci.com/gpaddis/gitlab-slack-notifier.svg?branch=master)](https://travis-ci.com/gpaddis/gitlab-slack-notifier)
 
 Send a reminder to a Slack channel with a list of open GitLab merge requests waiting for someone to merge them. You can define a list of groups to monitor, so that no merge requests sink into oblivion anymore.
@@ -15,7 +15,7 @@ The list of merge requests will look like this:
 
 ---
 
-The merge requests are sorted by date (older first) and marked with a :green_book: (1 day), :orange_book: (up to a week) or :closed_book: (older than a week). WIP MRs are not shown.
+The merge requests are sorted by date (older first) and marked with :green_book: (up to 1 day), :orange_book: (up to a week) or :closed_book: (older than a week). WIP MRs are not shown.
 
 This project was inspired by [slack-gitlab-mr-reminder](https://github.com/monokh/slack-gitlab-mr-reminder).
 

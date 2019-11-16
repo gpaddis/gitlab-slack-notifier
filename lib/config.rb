@@ -36,7 +36,7 @@ class Config
     @slack_webhook_url = slack_webhook_url
   end
 
-  # Raise a RuntimeError if the value is invalid.
+  # Raise a RuntimeError if the value is empty or nil.
   def validate(key, value)
     error = "Invalid value provided for #{key}. Check your configuration file."
     raise error if value.nil? || value.empty?
@@ -44,7 +44,7 @@ class Config
 
   # Create a new Config instance from a JSON file.
   def self.from_file(filename)
-    error = "Could not find #{filename} in the current directory."
+    error = "Could not find #{filename} in the script directory."
     raise error unless File.file?(filename)
 
     new(JSON.parse(File.read(filename)))

@@ -31,20 +31,26 @@ RSpec.describe MergeRequest, '#wip?' do
   end
 end
 
-RSpec.describe MergeRequest, '#waiting_days' do
+RSpec.describe MergeRequest, '#updated_string' do
   datetime_pattern = '%Y-%m-%d\T%I:%M:%S\Z'
 
   context 'a merge request wast last updated' do
     it 'was updated today' do
       today = Date.today.strftime(datetime_pattern)
       mr = MergeRequest.new(updated_at: today)
-      expect(mr.waiting_days).to eq 0
+      expect(mr.updated_string).to eq 'today'
     end
 
     it 'was updated yesterday' do
       yesterday = Date.today.prev_day.strftime(datetime_pattern)
       mr = MergeRequest.new(updated_at: yesterday)
-      expect(mr.waiting_days).to eq 1
+      expect(mr.updated_string).to eq 'yesterday'
+    end
+
+    it 'was updated 2 days ago' do
+      two_days_ago = Date.today.prev_day.prev_day.strftime(datetime_pattern)
+      mr = MergeRequest.new(updated_at: two_days_ago)
+      expect(mr.updated_string).to eq '2 days ago'
     end
   end
 end
@@ -88,7 +94,7 @@ RSpec.describe MergeRequest, '#to_markdown' do
       )
       formatted = ':green_book: [Resolve "Fix checkout bug"]' \
                   '(https://www.gitlab.com/example/1) - ' \
-                  "Updated by John Smith 1 day ago, assigned to Jane Doe\n"
+                  "Author: John Smith, updated yesterday, assigned to Jane Doe\n"
       expect(merge_request.to_markdown).to eq formatted
     end
   end
@@ -106,7 +112,7 @@ RSpec.describe MergeRequest, '#to_markdown' do
       )
       formatted = ':green_book: [Resolve "Fix checkout bug"]' \
                   '(https://www.gitlab.com/example/1) - ' \
-                  'Updated by John Smith 1 day ago, assigned to Jane Doe ' \
+                  'Author: John Smith, updated yesterday, assigned to Jane Doe ' \
                   ":no_entry_sign: cannot be merged\n"
       expect(merge_request.to_markdown).to eq formatted
     end
@@ -125,7 +131,7 @@ RSpec.describe MergeRequest, '#to_markdown' do
       )
       formatted = ':green_book: [Resolve "Fix checkout bug"]' \
                   '(https://www.gitlab.com/example/1) - ' \
-                  'Updated by John Smith 1 day ago ' \
+                  'Author: John Smith, updated yesterday ' \
                   ":no_entry_sign: cannot be merged\n"
       expect(merge_request.to_markdown).to eq formatted
     end

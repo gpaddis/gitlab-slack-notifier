@@ -44,12 +44,20 @@ class MergeRequest
 
   # Format a merge request as a Markdown one-liner.
   def to_markdown
-    plural = waiting_days == 1 ? 'day' : 'days'
     message = "#{importance_emoji} [#{title}](#{web_url}) - " \
-    "Updated by #{author} #{waiting_days} #{plural} ago"
+    "Author: #{author}, updated #{updated_string}"
     message += ", assigned to #{assignees}" if assignees
     message += ' :no_entry_sign: cannot be merged' unless can_be_merged?
     message + "\n"
+  end
+
+  # Get the updated_at time from now as a string (e.g. "2 days ago").
+  def updated_string
+    return 'today' if waiting_days.zero?
+
+    return 'yesterday' if waiting_days == 1
+
+    "#{waiting_days} days ago"
   end
 
   # Get the appropriate importance emoji for the merge request.

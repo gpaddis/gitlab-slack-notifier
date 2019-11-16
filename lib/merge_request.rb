@@ -55,9 +55,7 @@ class MergeRequest
   def updated_string
     return 'today' if waiting_days.zero?
 
-    return 'yesterday' if waiting_days == 1
-
-    "#{waiting_days} days ago"
+    waiting_days == 1 ? 'yesterday' : "#{waiting_days} days ago"
   end
 
   # Get the appropriate importance emoji for the merge request.
